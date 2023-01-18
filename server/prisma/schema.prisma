@@ -14,19 +14,20 @@ model ParkingLot {
   id            Int            @id @default(autoincrement())
   name          String
   location      String
-  ParkingSpaces ParkingSpace[]
+  parkingSpaces ParkingSpace[]
 }
 
 model ParkingSpace {
   id           Int                   @id @default(autoincrement())
+  name         String
   ParkingLot   ParkingLot?           @relation(fields: [parkingLotId], references: [id])
   parkingLotId Int?
-  History      ParkingSpaceHistory[]
+  history      ParkingSpaceHistory[]
 }
 
 model ParkingSpaceHistory {
   id             Int               @id @default(autoincrement())
-  State          ParkingSpaceState
+  state          ParkingSpaceState
   created_at     DateTime          @default(now())
   ParkingSpace   ParkingSpace?     @relation(fields: [parkingSpaceId], references: [id])
   parkingSpaceId Int?

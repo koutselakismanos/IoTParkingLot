@@ -1,23 +1,17 @@
 import { AppShell, Burger, Header, MediaQuery, Navbar, Text, useMantineTheme } from '@mantine/core';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import { Outlet, Link } from 'react-router-dom';
 
-function App() {
+function App({ children }) {
   const theme = useMantineTheme();
-
   const [opened, setOpened] = useState(false);
-  const { data, isLoading } = useQuery({
-    queryFn: async () => {
-      const result = await fetch('/api/parking-lots');
-      return result.json();
-    },
-    queryKey: ['parking-lots'],
-  });
+
   return (
     <AppShell
       navbar={
         <Navbar p="md" hiddenBreakpoint="sm" hidden={!opened} width={{ sm: 200, lg: 300 }}>
-          <Text>Application navbar</Text>
+          <Link to={'parking-lots'}>Parking Lots</Link>
         </Navbar>
       }
       header={
@@ -38,10 +32,7 @@ function App() {
         </Header>
       }
     >
-      {data?.map((parkingLot) => {
-        return <Text>{parkingLot.name}</Text>;
-      })}
-      {/*<Text>{da}</Text>*/}
+      <Outlet />
     </AppShell>
   );
 }

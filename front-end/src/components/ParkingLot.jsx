@@ -32,7 +32,11 @@ function ParkingLot() {
 
           let parkingSpaces = parkingLot.parkingSpaces.map((parkingSpace) => {
             if( parkingSpace.id === parkingSpotStateEvent.parkingSpaceId ) {
-              parkingSpace.history[0].state = parkingSpotStateEvent.state;
+              if(parkingSpace.history[0]) {
+                parkingSpace.history[0].state = parkingSpotStateEvent.state;
+              } else {
+                parkingSpace.history.push({state: parkingSpotStateEvent.state})
+              }
             }
             return parkingSpace;
           });

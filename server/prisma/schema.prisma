@@ -20,7 +20,7 @@ model ParkingLot {
 // TODO: rename to ParkingSpot
 model ParkingSpace {
   id           Int                   @id @default(autoincrement())
-  name         String @unique
+  name         String? @unique
   ParkingLot   ParkingLot?           @relation(fields: [parkingLotId], references: [id])
   parkingLotId Int?
   history      ParkingSpaceHistory[]

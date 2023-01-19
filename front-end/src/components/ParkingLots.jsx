@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
+import {Text } from '@mantine/core';
 
 function ParkingLots({ children }) {
   const { data, isLoading } = useQuery({
@@ -12,7 +13,7 @@ function ParkingLots({ children }) {
 
   return (
     <>
-      <div>test</div>
+      <Text>Parking Lots</Text>
       {data?.map((parkingLot) => {
         return <Link to={`/parking-lots/${parkingLot.id}`}>{parkingLot.name}</Link>;
       })}

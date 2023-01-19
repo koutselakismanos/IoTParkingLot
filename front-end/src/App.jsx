@@ -26,8 +26,6 @@ function App({ children }) {
                 mr="xl"
               />
             </MediaQuery>
-
-            <Text>Parking Lot</Text>
           </div>
         </Header>
       }

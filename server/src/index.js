@@ -120,8 +120,8 @@ function sendEventsToAll(eventType, data) {
 
 async function sendNewParkPositionState(request, response, next) {
   const newParkPositionHistory = {
-    parkingSpaceId: 3,
-    state: ParkingSpaceState.FREE,
+    parkingSpaceId: 6,
+    state: ParkingSpaceState.OCCUPIED,
     id: new Date().getTime(),
     created_at: '2023-01-18T11:53:56.025Z',
   };

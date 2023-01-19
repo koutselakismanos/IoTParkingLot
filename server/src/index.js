@@ -13,7 +13,6 @@ dotenv.config();
 const port = 5000;
 
 let clients = [];
-let facts = [];
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -131,7 +130,7 @@ async function sendNewParkPositionState(request, response, next) {
 
 setInterval(() => {
   const newParkPositionHistory = {
-    parkingSpaceId: Math.floor(Math.random() * 8 + 1),
+    parkingSpaceId: Math.floor(Math.random() * 12 + 1),
     state:
       Math.round(Math.random()) === 0
         ? ParkingSpaceState.OCCUPIED
@@ -140,7 +139,7 @@ setInterval(() => {
     created_at: '2023-01-18T11:53:56.025Z',
   };
   return sendEventsToAll('parking-spot', newParkPositionHistory);
-}, 100);
+}, 500);
 
 app.post('/pepe', sendNewParkPositionState);
 

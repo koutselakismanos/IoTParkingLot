@@ -1,10 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
-import { Box, Center, MantineProvider } from '@mantine/core';
+import { Box, MantineProvider } from '@mantine/core';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, Link, Outlet, RouterProvider } from 'react-router-dom';
 import ParkingLots from './components/ParkingLots.jsx';
 import ParkingLot from './components/ParkingLot.jsx';
 
@@ -27,7 +26,7 @@ const router = createBrowserRouter([
     ),
     children: [
       {
-        path: 'parking-lots',
+        path: '/',
         element: <ParkingLots />,
       },
       {

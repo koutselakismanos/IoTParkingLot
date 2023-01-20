@@ -39,13 +39,14 @@ function ParkingSpot(props) {
               src={Mercedes}
               height={60}
               alt="mercedes car top view"
-              style={{ transform: props.leftAligned ? undefined : 'rotate(180deg)' }}
+              style={{ transform: props.leftAligned ? undefined : 'rotate(180deg)',
+                filter: `drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.4)` }}
             />
           </motion.div>
         )}
       </AnimatePresence>
       {!props.occupied && (
-        <Text style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
+        <Text style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', color: theme.colors.gray[9] }}>
           Available
         </Text>
       )}

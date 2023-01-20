@@ -128,18 +128,18 @@ async function sendNewParkPositionState(request, response, next) {
   return sendEventsToAll('parking-spot', newParkPositionHistory);
 }
 
-setInterval(() => {
-  const newParkPositionHistory = {
-    parkingSpaceId: Math.floor(Math.random() * 12 + 1),
-    state:
-      Math.round(Math.random()) === 0
-        ? ParkingSpaceState.OCCUPIED
-        : ParkingSpaceState.FREE,
-    id: new Date().getTime(),
-    created_at: '2023-01-18T11:53:56.025Z',
-  };
-  return sendEventsToAll('parking-spot', newParkPositionHistory);
-}, 500);
+// setInterval(() => {
+//   const newParkPositionHistory = {
+//     parkingSpaceId: Math.floor(Math.random() * 12 + 1),
+//     state:
+//       Math.round(Math.random()) === 0
+//         ? ParkingSpaceState.OCCUPIED
+//         : ParkingSpaceState.FREE,
+//     id: new Date().getTime(),
+//     created_at: '2023-01-18T11:53:56.025Z',
+//   };
+//   return sendEventsToAll('parking-spot', newParkPositionHistory);
+// }, 500);
 
 app.post('/pepe', sendNewParkPositionState);
 

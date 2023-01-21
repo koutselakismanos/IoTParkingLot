@@ -10,3 +10,13 @@ services:
       POSTGRES_DB: iot-project
     ports:
       - "5432:5432"
+
+  mosquitto:
+    image: eclipse-mosquitto:2.0.15
+    volumes:
+      - type: bind
+        source: mosquitto.conf
+        target: /mosquitto/config/mosquitto.conf
+    ports:
+      - "1883:1883"
+      - "9001:9001"

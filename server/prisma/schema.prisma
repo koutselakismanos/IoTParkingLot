@@ -11,10 +11,24 @@ datasource db {
 }
 
 model ParkingLot {
-  id            Int            @id @default(autoincrement())
-  name          String
-  location      String
-  parkingSpaces ParkingSpace[]
+  id               Int               @id @default(autoincrement())
+  name             String
+  location         String
+  parkingSpaces    ParkingSpace[]
+  parkingLotEvents ParkingLotEvent[]
+}
+
+model ParkingLotEvent {
+  id           Int           @id @default(autoincrement())
+  event        EntranceEvent
+  created_at   DateTime      @default(now())
+  ParkingLot   ParkingLot?   @relation(fields: [parkingLotId], references: [id])
+  parkingLotId Int?
+}
+
+enum EntranceEvent {
+  ENTRY
+  DEPARTURE
 }
 
 // TODO: rename to ParkingSpot

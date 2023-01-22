@@ -1,8 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
-import {Text } from '@mantine/core';
+import { Badge, Button, Flex, Text, useMantineTheme } from '@mantine/core';
 
 function ParkingLots({ children }) {
+  const theme = useMantineTheme();
   const { data, isLoading } = useQuery({
     queryFn: async () => {
       const result = await fetch('/api/parking-lots');
@@ -13,10 +14,27 @@ function ParkingLots({ children }) {
 
   return (
     <>
-      <Text>Parking Lots</Text>
-      {data?.map((parkingLot) => {
-        return <Link to={`/parking-lots/${parkingLot.id}`}>{parkingLot.name}</Link>;
-      })}
+      <Text style={{ marginBottom: theme.spacing.md }}>Parking Lots</Text>
+      <Flex direction={'column'} gap={'sm'}>
+        {data?.map((parkingLot) => {
+          return (
+            <Link
+              style={{
+                color: 'white',
+                textDecoration: 'none',
+                padding: theme.spacing,
+                cursor: 'pointer',
+                paddingBlock: 2,
+              }}
+              to={`/parking-lots/${parkingLot.id}`}
+            >
+              <Button fullWidth color={'dark'}>
+                {parkingLot.name}
+              </Button>
+            </Link>
+          );
+        })}
+      </Flex>
     </>
   );
 }

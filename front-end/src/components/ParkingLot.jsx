@@ -3,9 +3,8 @@ import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { Badge, Box, Button, Center, Flex, Grid, Text, useMantineTheme } from '@mantine/core';
 import ParkingSpot from './ParkingSpot.jsx';
-import { AnimatePresence, motion, useAnimationControls } from 'framer-motion';
+import { motion, useAnimationControls } from 'framer-motion';
 import Mercedes from '../assets/mercedes.svg';
-import { useSetState } from '@mantine/hooks';
 
 function ParkingLot() {
   const [parkingLot, setParkingLot] = useState({});
@@ -15,6 +14,7 @@ function ParkingLot() {
   const [animate, setAnimate] = useState(false);
   const theme = useMantineTheme();
   let params = useParams();
+
   const { data, isLoading } = useQuery({
     queryFn: async () => {
       const result = await fetch(`/api/parking-lots/${params.id}`);

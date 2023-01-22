@@ -117,6 +117,12 @@ void loop(){
     sprintf(message, "%s|%s|%s", "1", "A2", "FREE");
     client.publish(PARKING_SPOT_STATE, message);
     delay(2000);
+    sprintf(message, "%s|%s|%s", "1", "A1", "OCCUPIED");
+    client.publish(PARKING_SPOT_STATE, message);
+    delay(2000);
+    sprintf(message, "%s|%s|%s", "1", "A1", "FREE");
+    client.publish(PARKING_SPOT_STATE, message);
+    delay(2000);
     sprintf(message, "%s|%s", "1", "DEPARTURE");
     client.publish(PARKING_LOT, message);
     

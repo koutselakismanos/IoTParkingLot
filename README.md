@@ -15,6 +15,7 @@ Parking system with real time monitoring of parking spots, entries and departure
 - [Docker](https://docs.docker.com/get-docker/)
 - [NodeJs](https://nodejs.org/en/download/)
 - [Arduino](https://www.arduino.cc/en/software)
+- [PubSubClient](https://pubsubclient.knolleary.net/)
 
 ## How to setup
 

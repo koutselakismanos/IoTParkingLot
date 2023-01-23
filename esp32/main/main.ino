@@ -10,10 +10,16 @@
 #define SSID "PizzaDelivery"
 #define SSID_PASSWORD "pizzadoros"
 
+#define PARKING_LOT_ID "1"
+
 #define PARKING_SPOT_STATE "parking_spot_state"
 #define PARKING_LOT "parking_lot"
-
-#define PARKING_LOT_ID 1
+#define OCCUPIED "OCCUPIED"
+#define FREE "FREE"
+#define ENTRY "ENTRY"
+#define DEPARTURE "DEPARTURE"
+#define A1 "A1"
+#define A2 "A2"
 
 unsigned long last = 0;
 
@@ -97,7 +103,6 @@ void loop(){
     reconnect();
   }
 
-
   // boolean loop ()
   // This should be called regularly to allow the client to process 
   // incoming messages and maintain its connection to the server.
@@ -105,26 +110,30 @@ void loop(){
   
   if (millis() > last + 200){
     last = millis();
-    delay(2000);
-    char message[100];
 
-    sprintf(message, "%s|%s", "1", "ENTRY");
-    client.publish(PARKING_LOT, message);
     delay(2000);
-    sprintf(message, "%s|%s|%s", "1", "A2", "OCCUPIED");
-    client.publish(PARKING_SPOT_STATE, message);
+    publish_parking_lot_event(ENTRY);
     delay(2000);
-    sprintf(message, "%s|%s|%s", "1", "A2", "FREE");
-    client.publish(PARKING_SPOT_STATE, message);
+    publish_parking_spot_state(A2, OCCUPIED);
     delay(2000);
-    sprintf(message, "%s|%s|%s", "1", "A1", "OCCUPIED");
-    client.publish(PARKING_SPOT_STATE, message);
+    publish_parking_spot_state(A2, FREE);
     delay(2000);
-    sprintf(message, "%s|%s|%s", "1", "A1", "FREE");
-    client.publish(PARKING_SPOT_STATE, message);
+    publish_parking_spot_state(A1, OCCUPIED);
     delay(2000);
-    sprintf(message, "%s|%s", "1", "DEPARTURE");
-    client.publish(PARKING_LOT, message);
-    
+    publish_parking_spot_state(A1, FREE);
+    delay(2000);
+    publish_parking_lot_event(DEPARTURE);
   }
+}
+
+void publish_parking_lot_event(char* event) {
+  char message[100];
+  sprintf(message, "%s|%s", PARKING_LOT_ID, event);
+  client.publish(PARKING_LOT, message);
+}
+
+void publish_parking_spot_state(char* parking_spot_name, char* state) {
+  char message[100];
+  sprintf(message, "%s|%s|%s", PARKING_LOT_ID, parking_spot_name, state);
+  client.publish(PARKING_SPOT_STATE, message);
 }

@@ -7,13 +7,15 @@ import { motion, useAnimationControls } from 'framer-motion';
 import Mercedes from '../assets/mercedes.svg';
 
 function ParkingLot() {
-  const [parkingLot, setParkingLot] = useState({});
+  let params = useParams();
+
+  const [parkingLotData, setParkingLotData] = useState({});
   const [listening, setListening] = useState(false);
   const controlsEntry = useAnimationControls();
   const controlsDeparture = useAnimationControls();
   const [animate, setAnimate] = useState(false);
+
   const theme = useMantineTheme();
-  let params = useParams();
 
   const { data, isLoading } = useQuery({
     queryFn: async () => {
@@ -25,7 +27,7 @@ function ParkingLot() {
 
   useEffect(() => {
     if (data) {
-      setParkingLot(data);
+      setParkingLotData(data);
     }
 
     if (!listening) {
@@ -34,7 +36,7 @@ function ParkingLot() {
       eventSource.addEventListener(`parking-spot/${params.id}`, (e) => {
         const parkingSpotStateEvent = JSON.parse(e.data);
 
-        setParkingLot((parkingLot) => {
+        setParkingLotData((parkingLot) => {
           let parkingSpaces = parkingLot?.parkingSpaces?.map((parkingSpace) => {
             if (parkingSpace.id === parkingSpotStateEvent.parkingSpaceId) {
               if (parkingSpace.history[0]) {
@@ -58,13 +60,13 @@ function ParkingLot() {
 
         switch (parkingLotEvent?.event) {
           case 'ENTRY':
-            setParkingLot((state) => {
+            setParkingLotData((state) => {
               return { ...state, entries: state.entries + 1 };
             });
             await controlsEntry.start((i) => ({ y: [150, 0], opacity: [0, 1, 0] }));
             break;
           case 'DEPARTURE':
-            setParkingLot((state) => {
+            setParkingLotData((state) => {
               return { ...state, departures: state.departures + 1 };
             });
             await controlsDeparture.start((i) => ({ y: [0, 150], opacity: [0, 1, 0] }));
@@ -82,21 +84,22 @@ function ParkingLot() {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
+        position: 'relative',
       }}
     >
       <Flex justify={'center'} gap={'sm'}>
         <Text>{data?.name}</Text>
         <Badge variant={'dot'} color={'blue'}>
-          Entries: {parkingLot?.entries}
+          Entries: {parkingLotData?.entries}
         </Badge>
         <Badge variant={'dot'} color={'red'}>
-          Departures: {parkingLot?.departures}
+          Departures: {parkingLotData?.departures}
         </Badge>
       </Flex>
       <Flex>
         <Flex direction={'column'}>
-          {parkingLot?.parkingSpaces?.map((parkingSpace, i) => {
-            if (parkingLot?.parkingSpaces?.length / 2 > i) {
+          {parkingLotData?.parkingSpaces?.map((parkingSpace, i) => {
+            if (parkingLotData?.parkingSpaces?.length / 2 > i) {
               return (
                 <ParkingSpot
                   key={parkingSpace.id}
@@ -120,8 +123,8 @@ function ParkingLot() {
           </Text>
         </Box>
         <Flex direction={'column'}>
-          {parkingLot?.parkingSpaces?.map((parkingSpace, i) => {
-            if (parkingLot?.parkingSpaces?.length / 2 <= i) {
+          {parkingLotData?.parkingSpaces?.map((parkingSpace, i) => {
+            if (parkingLotData?.parkingSpaces?.length / 2 <= i) {
               return (
                 <ParkingSpot
                   key={parkingSpace.id}
@@ -142,7 +145,8 @@ function ParkingLot() {
         exit={{ opacity: 0 }}
         transition={{ duration: 1 }}
         style={{
-          position: 'relative',
+          position: 'absolute',
+          bottom: 0,
           alignItems: 'center',
         }}
       >
@@ -163,7 +167,8 @@ function ParkingLot() {
         exit={{ opacity: 0 }}
         transition={{ duration: 1 }}
         style={{
-          position: 'relative',
+          position: 'absolute',
+          bottom: 0,
           alignItems: 'center',
         }}
       >

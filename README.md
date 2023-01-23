@@ -18,26 +18,38 @@ Parking system with real time monitoring of parking spots, entries and departure
 
 ## How to setup
 
+Install dependencies
 ```
 cd front-end && npm install
 cd ..
 cd server && npm install
 ```
 
-Create a file .env and configure it referencing .env.example
+Create .env and update environment variables:
+
+```
+cp .env.example .env
+```
+
+Run postgresql and mosquitto broker:
 
 ```
 docker compose up
+```
+
+Run migrations and seed database
+
+```
 npx prisma migrate reset
 ```
 
-## Run server
+Run development server
 
 ```
 cd server && npm start
 ```
 
-## Run front end
+Run development front-end
 
 ```
 cd front-end && npm run dev

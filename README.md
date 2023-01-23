@@ -1,6 +1,6 @@
 # IoT Parking Lot
 
-Parking system with real time monitoring of parking spots, entrance and departures.
+Parking system with real time monitoring of parking spots, entries and departures.
 
 ![demo app](/assets/parking_lot_example.png)
 

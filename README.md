@@ -2,7 +2,7 @@
 
 Parking system with real time monitoring of parking spots, entries and departures.
 
-![demo app](/assets/parking_lot_example.png)
+[![Parking Lot](/assets/parking_lot_example.png)](/assets/demo.mp4)
 
 ## Architecture
 ![architecture](/assets/architecture.png)

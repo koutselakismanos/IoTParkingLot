@@ -20,10 +20,10 @@ This database schema design allows you to store each ParkingLot, *ENTRY* and *DE
 
 ## MQTT Topics
 
-The message format for the `parking_spot_state` is `ParkingLotId|ParkingSpotId|ParkingSpotState`
+The message format for the `parking_spot_state` is `ParkingLotId|ParkingSpotName|ParkingSpotState`
 The ParkingSpotState is either `FREE` or `OCCUPIED`. Here is an example message:
 ```
-1|8|FREE
+1|A2|FREE
 ```
 
 The message format for the `parking_lot` is `ParkingLotId|EntranceEvent`
